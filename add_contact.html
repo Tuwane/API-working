@@ -13,9 +13,9 @@
 <label for="lastname">lastname</label>
 <input type="Text" name="lastname" id="lastname"><br>
 <label for="mobile">Mobile</label>
-<input type="Text" name="mobile" id="moblie"><br/>
+<input type="Text" name="mobile" id="mobile"><br/>
 <label for="email">Email</label><br>
-<input type="Text" name="email" id="imail"><br/>
+<input type="Text" name="email" id="email"><br/>
 <label for="avatar">Select a file</label><br/>
 <input type="file" name="avatar" id="avatar"><br/>
 <button type="submit" id="submitForm">Submit</button>
@@ -26,12 +26,12 @@
 <script config.js></script>
 <script>
 document.getElementById("submitForm").addEventListener('click',submitForm);
-documemt.getElementById("homeLink").addEventListener('click',homeLink);
+document.getElementById("homeLink").addEventListener('click',homeLink);
 //prevent default behavior
 function submitForm(e){
 e.preventDafault();
 //our form to be sended to the sever to query
-const form = new formData(document.querySelector('#editForm'));
+const form = new FormData(document.querySelector('#editForm'));
 form.append('apikey',apikey);
 
 fetch(rootPath + 'controller/insert-contact',{
@@ -39,7 +39,7 @@ methoad:'POST',
 headers: {'Accept': 'application/json, *.*'},
 body: form
 })
-.them(function(response){
+.then(function(response){
 return response.text();
 })
 .then(function(data){
@@ -49,7 +49,7 @@ homeLink();
 }
 else
 {
-	arlet(data);
+	alert(data);
 	homeLink();
 }
 
@@ -58,7 +58,7 @@ else
 }
 function homeLink()
 {
-windows.open("index.html","_self");
+window.open("index.html","_self");
 
 }
 
