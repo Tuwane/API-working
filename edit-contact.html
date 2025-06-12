@@ -1,0 +1,50 @@
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<br/>
+
+<form id="editForm">
+<label for="firstname">firstname</label>
+<input type="Text" name="firstname" id="firstname" readonly><br>
+<label for="lastname">lastname</label>
+<input type="Text" name="lastname" id="lastname" readonly><br>
+<label for="mobile">Mobile</label>
+<input type="Text" name="mobile" id="mobile" readonly><br/>
+<label for="email">Email</label><br>
+<input type="Text" name="email" id="email" readonly><br/>
+<label for="avatar">Select a file</label><br/>
+<input type="file" name="avatar" id="avatar" hidden><br/>
+<button type="submit" id="submitForm" hidden>Submit</button>
+</form>
+<br/>
+<button id="homeLink" type="button">Home</button>
+<button id="editContact" type="button">Edit</button>
+<button id="deletContact" type="button">Delete</button>
+<script scr="config.js"></script>
+<script>
+document.getElementById("homeLink").addEventListener('click',homeLink);
+
+function homeLink()
+{
+window.open("index.html","_self");
+
+}
+var id = getId();
+console.log("The id is :" + id);
+function getId()
+{
+url = window.location.href;
+var post = url.search("=");
+var id = url.slice(post + 1);
+return id;
+}
+</script>
+
+
+
+</body>
+</html>
