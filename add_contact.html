@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 <body>
 	<br/>
 
-<form id="edit_form">
+<form id="editForm">
 <label for="firstname">firstname</label>
 <input type="Text" name="firstname" id="firstname"><br>
 <label for="lastname">lastname</label>
@@ -23,19 +23,20 @@
 <br/>
 <button id="homeLink" type="button">Home</button>
 
-<script config.js></script>
+<script scr="config.js"></script>
 <script>
 document.getElementById("submitForm").addEventListener('click',submitForm);
 document.getElementById("homeLink").addEventListener('click',homeLink);
 //prevent default behavior
 function submitForm(e){
-e.preventDafault();
+e.preventDefault();
+console.log("Form submitted");
 //our form to be sended to the sever to query
 const form = new FormData(document.querySelector('#editForm'));
-form.append('apikey',apikey);
+form.append('apiKey',apiKey);
 
 fetch(rootPath + 'controller/insert-contact',{
-methoad:'POST',
+method:'POST',
 headers: {'Accept': 'application/json, *.*'},
 body: form
 })
@@ -43,14 +44,16 @@ body: form
 return response.text();
 })
 .then(function(data){
-if(data == "1"){
+if(data === "1"){
 alert("Contact added.");
-homeLink();
+//homeLink();
+console.log(data);
 }
 else
 {
 	alert(data);
-	homeLink();
+	//homeLink();
+	console.log(data);
 }
 
 })
@@ -61,6 +64,7 @@ function homeLink()
 window.open("index.html","_self");
 
 }
+
 
 </script>
 
