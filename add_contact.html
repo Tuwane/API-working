@@ -29,6 +29,23 @@ e.preventDafault();
 const form = new formData(document.querySelector('#editForm'));
 form.append('apikey',apikey);
 
+fetch(rootPath + 'controller/insert-contact',{
+methoad:'POST',
+headers: {'Accept': 'applicatin/json, *.*'},
+body: form
+})
+.them(function(response){
+return response.text();
+)}
+.then(function(data){
+if(data == "1"){
+alert("Contact added.");
+
+}
+})
+
+}
+
 
 </script>
 
