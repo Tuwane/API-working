@@ -24,6 +24,10 @@
 
 <script config.js></script>
 <script>
+function submitForm(e){
+e.preventDafault();
+const form = new formData(document.querySelector('#editForm'));
+form.append('apikey',apikey);
 
 
 </script>
