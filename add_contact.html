@@ -20,10 +20,12 @@
 <button type="submit" id="submitForm">Submit</button>
 </form>
 <br/>
-<button id="homeLink" type="button">Home</botton>
+<button id="homeLink" type="button">Home</button>
 
 <script config.js></script>
 <script>
+document.getElementById("submitForm").addEventListener('click',submitForm);
+documemt.getElementById("homeLink").addEventListener('click',homeLink);
 //prevent default behavior
 function submitForm(e){
 e.preventDafault();
@@ -42,18 +44,22 @@ return response.text();
 .then(function(data){
 if(data == "1"){
 alert("Contact added.");
-
+homeLink();
 }
 else
 {
 	arlet(data);
-	//link-to-homepage
+	homeLink();
 }
 
 })
 
 }
+function homeLink()
+{
+windows.open("index.html","_self");
 
+}
 
 </script>
 
