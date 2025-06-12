@@ -24,24 +24,32 @@
 
 <script config.js></script>
 <script>
+//prevent default behavior
 function submitForm(e){
 e.preventDafault();
+//our form to be sended to the sever to query
 const form = new formData(document.querySelector('#editForm'));
 form.append('apikey',apikey);
 
 fetch(rootPath + 'controller/insert-contact',{
 methoad:'POST',
-headers: {'Accept': 'applicatin/json, *.*'},
+headers: {'Accept': 'application/json, *.*'},
 body: form
 })
 .them(function(response){
 return response.text();
-)}
+})
 .then(function(data){
 if(data == "1"){
 alert("Contact added.");
 
 }
+else
+{
+	arlet(data);
+	//link-to-homepage
+}
+
 })
 
 }
