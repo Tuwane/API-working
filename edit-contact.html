@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title></title>
 </head>
-<body>
+<body onload="getContact()">
 	<br/>
 
 <form id="editForm">
@@ -24,7 +24,9 @@
 <button id="homeLink" type="button">Home</button>
 <button id="editContact" type="button">Edit</button>
 <button id="deletContact" type="button">Delete</button>
-<script scr="config.js"></script>
+
+
+<script src="config.js"></script>
 <script>
 document.getElementById("homeLink").addEventListener('click',homeLink);
 
@@ -42,6 +44,17 @@ var post = url.search("=");
 var id = url.slice(post + 1);
 return id;
 }
+function getContact()
+{
+	fetch(rootPath + 'controller/get-contacts/?id=' + id)
+	.then(function(response){
+		return response.json();
+})
+	.then(function(data){
+	console.log(data);
+})
+}
+	
 </script>
 
 
