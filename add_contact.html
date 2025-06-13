@@ -1,56 +1,64 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
-	<body>
-		<br/>
-		<form id="edit_form">
-			<label for="firstname">Firstname</label>
-			<input type="text" name="firstname" id="firstname"><br>
-			<label for="lastname">Lastname</label>
-			<input type="text" name="lastname" id="lastname"><br>
-			<label for="mobile">Mobile</label>
-			<input type="text" name="mobile" id="mobile"><br>
-			<label for="email">Email</label><br>
-			<input type="text" name="email" id="email"><br>
-			<label for="avatar">Select a file</label><br>
-			<input type="file" name="avatar" id="avatar"><br>
-			<button type="submit" id="submitForm">Submit</button>
-		</form>
-		<br>
-		<button id="homeLink" type="button">Home</button>
+    <head>
+        <meta charset="UTF-8">
+        <title>Add Contacts</title>
+    </head>
+    <body>
+        <h2>Add Contacts</h2>
+        </br>
+        
+        <form id="addContactForm">
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" name="firstname"></br>
+            <label for="lastname">Last Name:</label>
+            <input type="text" id="lastname" name="lastname"></br>
+            <label for="mobile">Mobile:</label>
+            <input type="text" id="mobile" name="mobile"></br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email"></br>
+            <label for="avatar">Select a file</label></br>
+            <input type="file" id="avatar" name="avatar"></br>
+            <button type="submit" id="submitForm">Submit</button>
+        </form>
+        </br>
+        <button id="homeLink" type="button">Back to Contacts</button>
 
-		<script src="config.js"></script>
-		<script>
-			document.getElementById('edit_form').addEventListener('submit', submitForm);
-			document.getElementById('homeLink').addEventListener('click', function() {
-				window.location.href = 'index.html';
-			});
+        <script src="config.js"></script>
+        <script>
+            // Event listener for the submit and back to contacts buttons
+            document.getElementById("submitForm").addEventListener('click', submitForm);
+            document.getElementById("homeLink").addEventListener('click', homeLink);
 
-			function submitForm(e) {
-				e.preventDefault();
-				const form = new FormData(document.getElementById('edit_form'));
-				form.append('apikey', apikey);
+            // Submit the form to add a new contact
+            function submitForm(e) {
+                e.preventDefault(); // Prevent the default form submission
 
-				fetch(rootPath + 'controller/insert-contact', {
-					method: 'POST',
-					headers: { 'Accept': 'application/json, */*' },
-					body: form
-				})
-				.then(function(response) {
-					return response.text();
-				})
-				.then(function(data) {
-					if (data == "1") {
-						alert("Contact added.");
-					}
-				});
-			}
-		</script>
+                const formData = new FormData(document.querySelector('#addContactForm'));
+                formData.append('apiKey', apiKey); // Append the API key to the form data
 
+                fetch(rootPath + "controller/insert-contact/", {   //submitting the form data to the server
+                    method: 'POST',
+                    headers: {'Accept': 'application/json, *.*'},   // Accept header to format the response as JSON
+                    body: formData
+                })
+                .then(function(response){
+                    return response.text();  // returning the response as text
+                })
+                .then(function(data){
+                    if (data == "1") {
+                        alert("Contact added successfully!");  // Alert on success
+                        homeLink() // Redirect to the contacts page
+                    } else {
+                        alert("Error: " + data);  // Alert on error
+                        homeLink() // Redirect to the contacts page
+                    }
+                })
+            }
 
-
-	</body>
+            function homeLink() {
+                window.open("index.html", "_self");  // Redirect to the contacts page
+            }
+        </script>
+    </body>
 </html>
