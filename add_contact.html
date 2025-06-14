@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -49,6 +49,77 @@
 				});
 			}
 		</script>
+=======
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<br/>
+
+<form id="editForm">
+<label for="firstname">firstname</label>
+<input type="Text" name="firstname" id="firstname"><br>
+<label for="lastname">lastname</label>
+<input type="Text" name="lastname" id="lastname"><br>
+<label for="mobile">Mobile</label>
+<input type="Text" name="mobile" id="mobile"><br/>
+<label for="email">Email</label><br>
+<input type="Text" name="email" id="email"><br/>
+<label for="avatar">Select a file</label><br/>
+<input type="file" name="avatar" id="avatar"><br/>
+<button type="submit" id="submitForm">Submit</button>
+</form>
+<br/>
+<button id="homeLink" type="button">Home</button>
+
+<script scr="config.js"></script>
+<script>
+document.getElementById("submitForm").addEventListener('click',submitForm);
+document.getElementById("homeLink").addEventListener('click',homeLink);
+
+//prevent default behavior
+function submitForm(e){
+e.preventDefault();
+console.log("Form submitted");
+
+//our form to be sended to the sever to query
+const form = new FormData(document.querySelector('#editForm'));
+form.append('apiKey',apiKey);
+
+fetch(rootPath + 'controller/insert-contact/',{
+method:'POST',
+headers: {'Accept': 'application/json, *.*'},
+body: form
+})
+.then(function(response){
+return response.text();
+})
+.then(function(data){
+if(data === "1"){
+alert("Contact added.");
+homeLink();
+//console.log(data);
+}
+else
+{
+	alert(data);
+	//homeLink();
+	console.log(data);
+}
+
+})
+
+}
+function homeLink()
+{
+window.open("index.html","_self");
+
+}
+
+
+</script>
+>>>>>>> week6_API
 
 
 
