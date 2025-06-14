@@ -24,13 +24,16 @@
 <br/>
 <button id="homeLink" type="button">Home</button>
 <button id="editContact" type="button">Edit</button>
-<button id="deletContact" type="button">Delete</button>
+<button id="deleteContact" type="button">Delete</button>
 
 
 <script src="config.js"></script>
 <script>
+//Events Listeners here
 document.getElementById("homeLink").addEventListener('click',homeLink);
 document.getElementById("editContact").addEventListener('click',editContact);
+document.getElementById("submitForm").addEventListener('click',submitForm);
+document.getElementById("deleteContact").addEventListener('click',deleteContact);
 function homeLink()
 {
 window.open("index.html","_self");
@@ -74,11 +77,67 @@ document.getElementById("email").value = data[0].email;
 }	
 function editContact()
 {
+
 document.getElementById("firstname").readOnly = false;
 document.getElementById("lastname").readOnly = false;
 document.getElementById("mobile").readOnly = false;
 document.getElementById("email").readOnly = false;
+document.getElementById("submitForm").hidden = false;
+document.getElementById("avatar").hidden = false;
+
 }
+//function for submistion of edited contact
+function submitForm(e){
+e.preventDefault();
+
+const form = new FormData(document.querySelector("#editForm"));
+form.append('apiKey', apiKey);
+form.append('id', id);
+
+fetch(rootPath + 'controller/edit-contact/',{
+method: 'POST',
+headers:{'Accept': 'application/json, *.*'},
+body: form
+})
+.then(function(response){
+response.text();
+})
+.then(function(data){
+if(data == "1"){
+alert("Contact edited");
+homeLink();
+}
+else{
+alert(data);
+homeLink();
+}
+
+})
+
+}
+function deleteContact()
+{
+var confirmDelete = confirm("Are you sure you want to delete ");
+if(confirmDelete == true)
+{
+  fetch(rootPath + 'controller/delete-contact/?id=' + id)
+.then(function(response){
+return response.text();
+
+})
+.then(function(data){
+if(data == "1"){
+homeLink();
+}
+else{
+alert(data);
+}
+})
+
+}
+
+}
+
 </script>
 
 
