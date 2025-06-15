@@ -1,0 +1,35 @@
+#line1{
+    border: 3px;
+    width :51%;
+    background-color: aquamarine;
+
+}
+#line2{
+    font-family:fantasy;
+    border:3px solid blue;
+    color: rgb(245,66,200);
+    font-size:larger;
+    font-weight: 400;
+    width:50%;
+    background-color: burlywood;
+    text-align: center;
+
+}
+.lc3{
+    font-family:  sans-serif;
+    color:brown
+
+}
+.lc2{
+    color :yellowgreen;
+}
+#refresh{
+    color :blue;
+    font-size:larger;
+    background-color:darkorange;
+}
+#addContact{
+    color:green;
+    font-size:larger;
+    background-color: darkgoldenrod;
+}
